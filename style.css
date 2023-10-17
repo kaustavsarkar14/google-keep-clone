@@ -26,6 +26,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    transition: 1s all; 
+    transition: height 2s ease;
 }
 input, textarea {
     width: 100%;
@@ -44,11 +46,13 @@ button {
     cursor: pointer;
     position: relative;
     bottom: 0;
+    background-color: rgb(24, 24, 24);
 }
 
 .note {
     color: white;
-    width: 20rem;
+    width: 30%;
+    min-width: 20rem;
     border: 1px solid rgba(255, 255, 255, 0.313);
     border-radius: 9px;
     padding: 1rem;
@@ -56,6 +60,7 @@ button {
     flex-direction: column;
     justify-content: space-between;
     word-wrap: break-word;
+    min-height: 8rem;
 }
 #notes {
     margin-top: 2rem;
@@ -63,6 +68,7 @@ button {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    /* padding-inline: 10%; */
 }
 
 .buttons {
@@ -71,8 +77,10 @@ button {
     gap: 5px;
 }
 .buttons>button {
-    padding: 1px 4px;
+    padding: 3px 5px;
     font-size: 0.9rem;
+    margin-left: 5px;
+    transition: 0.3s all;
 }
 
 
@@ -89,6 +97,21 @@ button {
     font-size: 0.8rem;
     opacity: 0.7;
 }
+select {
+    background-color: #292a2d;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid white;
+    background-color: rgba(24, 24, 24, 0.53);
+}
+option {
+    box-shadow: 2px 2px 2px red;
+    color: white;
+}
+select:hover, button:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
 
 @media screen and (max-width:768px){
     #input-box {
@@ -96,5 +119,9 @@ button {
     }
     #notes {
         padding-inline: 5%;
+    }
+    .note {
+        width: 100%;
+        padding: 1.4rem;
     }
 }

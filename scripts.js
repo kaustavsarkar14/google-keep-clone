@@ -2,6 +2,7 @@ const addTitle = document.getElementById('addTitle')
 const addNoteButton = document.getElementById('addNote')
 const addText = document.getElementById('addText')
 const notesDiv = document.getElementById('notes')
+const inputBox = document.getElementById('input-box')
 let notes = JSON.parse(localStorage.getItem('notes')) || []
 let isTitleEdited = false
 
@@ -12,11 +13,13 @@ addText.addEventListener('focus', () => {
     addTitle.style.display = "block"
     addText.rows = 3
 })
-addText.addEventListener('blur', () => {
-    addNoteButton.style.display = "none"
-    addTitle.style.display = "none"
-    addText.rows = 1
-    addNotes()
+document.addEventListener('click', (e) => {
+    if (!inputBox.contains(e.target)) {
+        addNoteButton.style.display = "none"
+        addTitle.style.display = "none"
+        addText.rows = 1
+        addNotes()
+    }
 })
 
 function addNotes() {
@@ -46,10 +49,13 @@ function showNotes() {
         <div class="bottom" >
         <p>${formatDate(date)}</p>
         <div class="buttons" >
-        <label for="bgColor" >Color</label>
-        <div style="display:none;" >
-            <input data-index="${i}" oninput="setColor(this)" id="bgColor" type="color">
-        </div>
+        <select id=${i} oninput="setColor(this)" >
+            <option disabled selected>Color</option>
+            <option value="none" style="background-color:#292a2d;" >none</option>
+            <option value="#6e0000" style="background-color:#6e0000; color:white;" >Red</option>
+            <option value="#006e05" style="background-color: #006e05;; color:white;" >Green</option>
+            <option value="#948f01" style="background-color: #948f01;" >Yellow</option>
+        </select>
         <button onclick="editNote(this)" >Edit</button>
         <button onclick="deleteNote(this)" >Delete</button>
         </div>
@@ -125,7 +131,10 @@ function formatDate(date) {
 }
 
 function setColor(colorInput) {
-    console.log(colorInput);
+    const notesDiv = colorInput.parentNode.parentNode.parentNode
+    notes[notesDiv.id].bgColor = colorInput.value
+    showNotes()
+    saveNotes()
 }
 
 
